@@ -1,0 +1,39 @@
+{
+  "name": "@unnullable/unwrap",
+  "version": "1.0.0",
+  "description": "A functional programming library for typescript developers",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "jest",
+    "test-coverage": "jest --coverage=true"
+  },
+  "keywords": [
+    "functional programming",
+    "functional",
+    "monads",
+    "option",
+    "result",
+    "io"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.13",
+    "eslint": "^9.11.1",
+    "globals": "^15.9.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript-eslint": "^8.7.0"
+  }
+}
