@@ -1,5 +1,5 @@
-import {Option} from "./functional/option";
-import {Result} from "./functional/result";
+import {Maybe} from "./functional/maybe";
+import {Either} from "./functional/either";
 import {IO} from "./functional/io";
 
-export {Option, Result, IO}
+export {Maybe, Either, IO}

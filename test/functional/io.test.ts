@@ -1,5 +1,5 @@
 import {IO} from "../../src/functional/io";
-import {Option} from "../../src/functional/option";
+import {Maybe} from "../../src/functional/maybe";
 
 describe('IO monad', () => {
     describe('Compute operator', () => {
@@ -46,8 +46,8 @@ describe('IO monad', () => {
         ])('should compute the IO and convert it to a Some holding the computed value', (value) => {
             const result = IO.of(value)
 
-            const expected = Option.Some(value)
-            expect(result.toOption()).toEqual(expected)
+            const expected = Maybe.Some(value)
+            expect(result.toMaybe()).toEqual(expected)
         })
 
         it.each([
@@ -55,8 +55,8 @@ describe('IO monad', () => {
         ])('should compute the IO and convert it to a None', (value) => {
             const result = IO.of(value)
 
-            const expected = Option.None()
-            expect(result.toOption()).toEqual(expected)
+            const expected = Maybe.None()
+            expect(result.toMaybe()).toEqual(expected)
         })
     })
 })

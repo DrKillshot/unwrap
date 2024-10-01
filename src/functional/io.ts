@@ -1,4 +1,4 @@
-import {Option} from "./option";
+import {Maybe} from "./maybe";
 
 export interface IO<T> {
     /**
@@ -22,10 +22,10 @@ export interface IO<T> {
     compute(): T
 
     /**
-     * Converts the IO to an Option.
-     * @returns An Option containing the value inside the IO.
+     * Converts the IO to a Maybe.
+     * @returns An Maybe containing the value inside the IO.
      */
-    toOption(): Option<T>
+    toMaybe(): Maybe<T>
 }
 
 class __IO<T> implements IO<T> {
@@ -47,8 +47,8 @@ class __IO<T> implements IO<T> {
         return this.effect()
     }
 
-    toOption(): Option<T> {
-        return Option.fromNullable(this.compute())
+    toMaybe(): Maybe<T> {
+        return Maybe.fromNullable(this.compute())
     }
 }
 
