@@ -20,7 +20,7 @@ export interface Either<O, E> {
      * @param fn Transformation function that returns an Either.
      * @returns The Either of the transformation function or the original Either.
      */
-    flatMap<T>(fn: (input: O) => Either<T, never> | Either<never, T>): Either<T, never> | Either<O,E>
+    flatMap<T, R>(fn: (input: O) => Either<T, R>): Either<T, E | R>
 
     /**
      * Swaps the Ok and Error values.
@@ -101,7 +101,7 @@ class Ok<O> implements Either<O, never>, UnwrapOk<O> {
         return this
     }
 
-    flatMap<T>(fn: (input: O) => Either<T, never>): Either<T, never> {
+    flatMap<T, R>(fn: (input: O) => Either<T, R>): Either<T, R> {
         return fn(this.value)
     }
 
@@ -166,7 +166,7 @@ class Error<E> implements Either<never, E>, UnwrapError<E> {
         return new Error(fn(this.value))
     }
 
-    flatMap<T>(_: (input: never) => Either<T, never>): Either<never, E> {
+    flatMap<T, R>(_: (input: never) => Either<T, R>): Either<never, E> {
         return this
     }
 
