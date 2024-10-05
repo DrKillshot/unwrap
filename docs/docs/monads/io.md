@@ -1,6 +1,7 @@
 ---
 title: IO<Operation>
 sidebar_label: IO
+sidebar_position: 3
 ---
 
 The `IO` monad is for isolating side effects in your program. This monad is **lazy** and will not be evaluated until the `compute` method is called.
@@ -62,21 +63,19 @@ const ioString = IO.of("hello");
 console.log(ioString.compute()); // "hello"
 ```
 
-### .toOption()
+### .toMaybe()
 
 ```ts title="Signature"
-IO<T>.toOption(): Option<T>
+IO<T>.toMaybe(): maybe<T>
 ```
 
-Converts the `IO` to an `Option`.
+Converts the `IO` to a `maybe`.
 
 ```ts title="Examples"
 const ioValue = IO.of(5);
-const optionValue = ioValue.toOption(); // Some(5)
+const maybeValue = ioValue.toMaybe(); // Some(5)
 
 const ioNull = IO.of(null);
-const optionNull = ioNull.toOption(); // None
+const maybeNull = ioNull.toMaybe(); // None
 
 ```
-
-Converts the IO to an Option.
