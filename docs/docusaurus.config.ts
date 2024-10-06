@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Unwrap',
   tagline: 'Functional programming containers for all',
-  favicon: 'favicon/favicon.ico',
+  favicon: 'favicon.ico',
 
   // Set the production url of your site here
   url: 'https://your-docusaurus-site.example.com',
@@ -66,16 +66,16 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'Unwrap',
+      title: "Unwrap",
       logo: {
         alt: 'Unwrap logo',
-        src: 'favicon/android-chrome-512x512.png',
+        src: 'unwrap.png',
       },
       items: [
         {to: 'docs/Library/getting-started', label: 'Getting started', position: 'left'},
         {to: '/docs/Monads/maybe' ,position: 'left', label: 'API'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/DrKillshot/unwrap',
           label: 'GitHub',
           position: 'right',
         },
@@ -119,7 +119,7 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/DrKillshot/unwrap',
             },
           ],
         },

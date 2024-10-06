@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsup",
     "test": "jest",
-    "test-coverage": "jest --coverage=true"
+    "test-coverage": "jest --coverage=true --coverageDirectory=/dev/null"
   },
   "keywords": [
     "functional programming",
