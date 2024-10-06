@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[254],{2034:e=>{e.exports=JSON.parse('{"categoryGeneratedIndex":{"title":"Learn","slug":"/category/learn","permalink":"/unwrap/docs/category/learn","sidebar":"docs","navigation":{"next":{"title":"Getting started","permalink":"/unwrap/docs/library/getting-started"}}}}')}}]);
