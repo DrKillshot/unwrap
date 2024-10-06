@@ -3,7 +3,7 @@ name: Deploy Docusaurus Docs
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'docs/**'
       - '.github/workflows/deploy-docs.yml'
