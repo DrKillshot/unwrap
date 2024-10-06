@@ -15,6 +15,9 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Monads',
+      link: {
+        type: 'generated-index',
+      },
       collapsed: false,
       items: [
           'monads/maybe',

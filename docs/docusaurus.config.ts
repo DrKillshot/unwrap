@@ -11,14 +11,14 @@ const config: Config = {
   url: 'https://github.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/@unnullable/unwrap',
+  baseUrl: '/unwrap',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'unNullable', // Usually your GitHub org/user name.
-  projectName: 'unwrap', // Usually your repo name.
+  organizationName: 'Unnullable', // Usually your GitHub org/user name.
+  projectName: 'Unwrap', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
@@ -38,7 +38,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/DrKillshot/unwrap',
         },
         blog: {
           showReadingTime: true,
@@ -49,7 +49,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/DrKillshot/unwrap',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -64,7 +64,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'unwrap.png',
     navbar: {
       title: "Unwrap",
       logo: {
@@ -72,8 +72,8 @@ const config: Config = {
         src: 'unwrap.png',
       },
       items: [
-        {to: 'docs/Library/getting-started', label: 'Getting started', position: 'left'},
-        {to: '/docs/Monads/maybe' ,position: 'left', label: 'API'},
+        {to: '/unwrap/docs/library/getting-started', label: 'Getting started', position: 'left'},
+        {to: '/unwrap/docs/monads/maybe' ,position: 'left', label: 'API'},
         {
           href: 'https://github.com/DrKillshot/unwrap',
           label: 'GitHub',
@@ -85,38 +85,21 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Github',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Pull Requests',
+              to: 'https://github.com/DrKillshot/unwrap/pulls',
+            },
+            {
+              label: 'Issues',
+              to: 'https://github.com/DrKillshot/unwrap/issues'
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Contacts',
           items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
             {
               label: 'GitHub',
               href: 'https://github.com/DrKillshot/unwrap',
@@ -124,7 +107,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Unwrap.`,
     },
     prism: {
       theme: prismThemes.github,
