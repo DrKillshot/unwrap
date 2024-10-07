@@ -29,6 +29,7 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+/* For documentation footer */
 .footer--dark {
   background-color: #1B1B1D;
 }
