@@ -52,14 +52,14 @@ export interface Either<O, E> {
      * @param fn Function to apply to the value.
      * @returns The original Either.
      */
-    tap(fn: (input: O) => void): Either<O, E>
+    ifOk(fn: (input: O) => void): Either<O, E>
 
     /**
      * Applies a function to the error inside the Either if it is Error, does nothing otherwise.
      * @param fn Function to apply to the error.
      * @returns The original Either.
      */
-    tapError(fn: (input: E) => void): Either<O, E>
+    ifError(fn: (input: E) => void): Either<O, E>
 
     /**
      * Matches the Either to a function based on its state (Ok or Error).
@@ -79,11 +79,11 @@ export interface Either<O, E> {
 }
 
 interface UnwrapOk<T> {
-    get(): T
+    unwrap(): T
 }
 
 interface UnwrapError<T> {
-    getError(): T
+    unwrapError(): T
 }
 
 class Ok<O> implements Either<O, never>, UnwrapOk<O> {
@@ -121,13 +121,13 @@ class Ok<O> implements Either<O, never>, UnwrapOk<O> {
         return this
     }
 
-    tap(fn: (input: O) => void): Either<O, never> {
+    ifOk(fn: (input: O) => void): Either<O, never> {
         fn(this.value)
 
         return this
     }
 
-    tapError(_: (input: never) => void): Either<O, never> {
+    ifError(_: (input: never) => void): Either<O, never> {
         return this
     }
 
@@ -146,7 +146,7 @@ class Ok<O> implements Either<O, never>, UnwrapOk<O> {
         return Maybe.fromNullable(this.value)
     }
 
-    get(): O {
+    unwrap(): O {
         return this.value
     }
 }
@@ -186,11 +186,11 @@ class Error<E> implements Either<never, E>, UnwrapError<E> {
         return Ok.of(defaultValue)
     }
 
-    tap(_: (input: never) => void): Either<never, E> {
+    ifOk(_: (input: never) => void): Either<never, E> {
         return this
     }
 
-    tapError(fn: (input: E) => void): Either<never, E> {
+    ifError(fn: (input: E) => void): Either<never, E> {
         fn(this.value)
 
         return this
@@ -211,7 +211,7 @@ class Error<E> implements Either<never, E>, UnwrapError<E> {
         return Maybe.None()
     }
 
-    getError(): E {
+    unwrapError(): E {
         return this.value
     }
 }

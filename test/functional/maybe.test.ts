@@ -127,16 +127,16 @@ describe('Maybe Monad', () => {
         })
     })
 
-    describe('Tap operator', () => {
+    describe('IfPresent operator', () => {
         afterEach(() => {
             jest.clearAllMocks()
         })
 
         it.each([
             [Maybe.Some(1), (x: number) => console.log(x)]
-        ])('it should execute the tap function when Maybe has a value and then return the Maybe unchanged.', (Maybe, operation) => {
+        ])('it should execute the ifPresent function when Maybe has a value and then return the Maybe unchanged.', (Maybe, operation) => {
             const spy = jest.spyOn(console, 'log')
-            const result = Maybe.tap(operation)
+            const result = Maybe.ifPresent(operation)
 
             expect(result).toEqual(Maybe)
             expect(spy).toHaveBeenCalledTimes(1)
@@ -144,9 +144,9 @@ describe('Maybe Monad', () => {
 
         it.each([
             [Maybe.None(), () => console.log('Something')]
-        ])('it should not execute the tap operation when Maybe does not hold any value', (Maybe, operation) => {
+        ])('it should not execute the ifPresent operation when Maybe does not hold any value', (Maybe, operation) => {
             const spy = jest.spyOn(console, 'log')
-            const result = Maybe.tap(operation)
+            const result = Maybe.ifPresent(operation)
 
             expect(result).toEqual(Maybe)
             expect(spy).not.toHaveBeenCalled()
@@ -175,11 +175,11 @@ describe('Maybe Monad', () => {
         })
     })
 
-    describe('Get operator', () => {
+    describe('Unwrap operator', () => {
         it.each([
             1, "Hello world!", [1,2,3], {name: "An object"}
         ])('should get the value inside the Maybe', (MaybeValue) => {
-            const result = Maybe.Some(MaybeValue).get()
+            const result = Maybe.Some(MaybeValue).unwrap()
 
             expect(result).toEqual(MaybeValue)
         })

@@ -184,7 +184,7 @@ describe('Either monad', () => {
         })
     })
 
-    describe('Tap and tapError operators', () => {
+    describe('IfOk and ifError operators', () => {
         const ok = Either.Ok(1)
         const error = Either.Error("An error string")
         const operation = (input: number | string) => console.log(input)
@@ -194,29 +194,29 @@ describe('Either monad', () => {
             jest.clearAllMocks()
         })
 
-        it('should run the tap operation when Either is of type Ok', () => {
-            const result = ok.tap(operation)
+        it('should run the ifOk operation when Either is of type Ok', () => {
+            const result = ok.ifOk(operation)
 
             expect(result).toEqual(ok)
             expect(consoleSpy).toHaveBeenCalledTimes(1)
         })
 
-        it('should nto run the tap operation when Either is of type Error', () => {
-            const result = error.tap(operation)
+        it('should not run the ifOk operation when Either is of type Error', () => {
+            const result = error.ifOk(operation)
 
             expect(result).toEqual(error)
             expect(consoleSpy).toHaveBeenCalledTimes(0)
         })
 
-        it('should run the tapError operation when Either is of type Error', () => {
-            const result = error.tapError(operation)
+        it('should run the ifError operation when Either is of type Error', () => {
+            const result = error.ifError(operation)
 
             expect(result).toEqual(error)
             expect(consoleSpy).toHaveBeenCalledTimes(1)
         })
 
-        it('should not run the tapError operation when Either is of type Ok', () => {
-            const result = ok.tapError(operation)
+        it('should not run the ifError operation when Either is of type Ok', () => {
+            const result = ok.ifError(operation)
 
             expect(result).toEqual(ok)
             expect(consoleSpy).toHaveBeenCalledTimes(0)
@@ -243,7 +243,7 @@ describe('Either monad', () => {
         ])('should return an maybe with a value if Either "%s" type is Ok', (result) => {
             const maybe = result.toMaybe()
 
-            const expected = Maybe.Some(result.get())
+            const expected = Maybe.Some(result.unwrap())
             expect(maybe).toEqual(expected)
         })
 
@@ -256,19 +256,19 @@ describe('Either monad', () => {
         })
     })
 
-    describe('Get and getError operators', () => {
+    describe('Unwrap and unwrapError operators', () => {
         it.each([
             1, [1,2,3], [undefined, null], "Hello world!", {name: "An object"}
-        ])('should return the value "%s" on get call if Either is Ok', (value) => {
-            const result = Either.Ok(value).get()
+        ])('should return the value "%s" on unwrap call if Either is Ok', (value) => {
+            const result = Either.Ok(value).unwrap()
 
             expect(result).toEqual(value)
         })
 
         it.each([
             1, [1,2,3], [undefined, null], "Hello world!", {name: "An object"}
-        ])('should return the value "%s" on get call if Either is Error', (value) => {
-            const result = Either.Error(value).getError()
+        ])('should return the value "%s" on unwrapError call if Either is Error', (value) => {
+            const result = Either.Error(value).unwrapError()
 
             expect(result).toEqual(value)
         })

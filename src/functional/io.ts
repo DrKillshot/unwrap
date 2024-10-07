@@ -19,7 +19,7 @@ export interface IO<T> {
      * Computes and returns the value inside the IO.
      * @returns The computed value.
      */
-    compute(): T
+    unwrap(): T
 
     /**
      * Converts the IO to a Maybe.
@@ -43,12 +43,12 @@ class __IO<T> implements IO<T> {
         return fn(this.effect())
     }
 
-    compute(): T {
+    unwrap(): T {
         return this.effect()
     }
 
     toMaybe(): Maybe<T> {
-        return Maybe.fromNullable(this.compute())
+        return Maybe.fromNullable(this.unwrap())
     }
 }
 

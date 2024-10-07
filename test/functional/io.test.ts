@@ -8,7 +8,7 @@ describe('IO monad', () => {
         ])('should compute the io operation "%s" when compute() is called', (value) => {
             const result = IO.of(value)
 
-            expect(result.compute()).toEqual(value)
+            expect(result.unwrap()).toEqual(value)
         })
     })
 
@@ -22,7 +22,7 @@ describe('IO monad', () => {
             // @ts-ignore
             const result = IO.of(value).map(transformation)
 
-            expect(result.compute()).toEqual(final)
+            expect(result.unwrap()).toEqual(final)
         })
     })
 
@@ -36,7 +36,7 @@ describe('IO monad', () => {
             // @ts-ignore
             const result = IO.of(value).flatMap(transformation)
 
-            expect(result.compute()).toEqual(final)
+            expect(result.unwrap()).toEqual(final)
         })
     })
 

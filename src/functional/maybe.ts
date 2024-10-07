@@ -47,7 +47,7 @@ export interface Maybe<T> {
      * @param fn Function to apply to the value.
      * @returns The same Maybe.
      */
-    tap(fn: (input: T) => any): Maybe<T>
+    ifPresent(fn: (input: T) => any): Maybe<T>
 
     /**
      * Returns the value inside the Maybe if it is Some, otherwise returns the default value.
@@ -65,7 +65,7 @@ export interface Maybe<T> {
 }
 
 interface Unwrap<T> {
-    get(): T
+    unwrap(): T
 }
 
 class Some<T> implements Maybe<T>, Unwrap<T> {
@@ -108,7 +108,7 @@ class Some<T> implements Maybe<T>, Unwrap<T> {
         return matcher.Some;
     }
 
-    tap(fn: (input: T) => any): Maybe<T> {
+    ifPresent(fn: (input: T) => any): Maybe<T> {
         fn(this.value)
 
         return this
@@ -122,7 +122,7 @@ class Some<T> implements Maybe<T>, Unwrap<T> {
         return Either.Ok(this.value)
     }
 
-    get(): T {
+    unwrap(): T {
         return this.value
     }
 }
@@ -153,7 +153,7 @@ class None implements Maybe<never> {
         return matcher.None
     }
 
-    tap(_: (_: never) => any): Maybe<never> {
+    ifPresent(_: (_: never) => any): Maybe<never> {
         return this
     }
 
