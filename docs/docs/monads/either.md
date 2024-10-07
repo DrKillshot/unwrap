@@ -8,7 +8,7 @@ The `Either` monad can hold two types of values: an `Ok(value)` value and an `Er
 
 ## Either constructors
 
-Just like `Option`, the `Either` monad can be instantiated with specific constructors. In this case the `Ok(value)` and `Error(error)` constructor:
+Just like `Maybe`, the `Either` monad can be instantiated with specific constructors. In this case the `Ok(value)` and `Error(error)` constructor:
 
 ```ts title="Examples"
 const anOk = Either.Ok(10)
@@ -28,11 +28,11 @@ The `Either` monad exposes several methods for value manipulation
 Either<O,E>.map<T>(fn: (input: O) => T): Either<T, E> | Either<O, E>
 ```
 
-Transforms the error inside the `Either` if it is `Error`, otherwise does nothing.
+Transforms the error inside the `Either` if it is `Ok`, otherwise does nothing.
 
 ```ts title="Examples"
-const Either = Either.Ok(5);
-const newEither = Either.map(x => x * 2); // Ok(10)
+const Either = Either.Ok(10);
+const newEither = Either.map(x => x * 2); // Ok(20)
 
 const error = Either.Error(10)
 const newError = Either.map(x => x * 2) // Error(10)
@@ -41,7 +41,7 @@ const newError = Either.map(x => x * 2) // Error(10)
 ### .mapError(fn)
 
 ```ts title="Signature"
-Either<O,E>.map<T>(fn: (input: O) => T): Either<T, E> | Either<O, E>
+Either<O,E>.map<T>(fn: (input: O) => T): Either<O, T>
 ```
 
 Transforms the value inside the `Either` if it is `Ok`, otherwise does nothing.
@@ -60,7 +60,7 @@ const newOk = ok.mapError(err => `new ${err}`) // Ok("OK!")
 Either<O,E>.flatMap<T, R>(fn: (input: O) => Either<T, R>): Either<T, E | R>
 ```
 
-Transforms the value inside the `Either` into another `Either` and flattens the result. If the `Either` is `Error`, the original `Either` is returned unchanged.
+Transforms the value inside the `Either` into another `Either` and flattens the result. If the `Either` is `Error`, the original type is returned unchanged.
 
 ```ts title="Examples"
 const okValue = Either.Ok(5);
@@ -124,7 +124,7 @@ console.log(errorValue.isError()); // true
 Either<E,O>.recover<T>(defaultValue: T): Either<O, E> | Either<T, E>
 ```
 
-Recovers from an Error by providing a default value. If the `Either` is `Error`, it returns a new `Either` with the default value as `Ok`. If it is `Ok`, the original `Either` is returned unchanged.
+Recovers from an `Error` by providing a default value. If the `Either` is `Error`, it returns a new `Either` with the default value as `Ok`. If it is `Ok`, the original `Either` is returned unchanged.
 
 ```ts title="Examples"
 const okValue = Either.Ok(5);
@@ -133,37 +133,36 @@ const recoveredOk = okValue.recover(10); // Ok(5)
 const errorValue = Either.Error("Something went wrong");
 const recoveredError = errorValue.recover(10); // Ok(10)
 ```
-
-### .tap(fn)
+### .ifOk(fn)
 
 ```ts title="Signature"
-Either<O,E>.tap(fn: (input: O) => void): Either<O, E>
+Either<O,E>.ifOk(fn: (input: O) => void): Either<O, E>
 ```
 
 Applies a function to the value inside the `Either` if it is `Ok`, without changing the `Either`. If it is `Error`, the original `Either` is returned unchanged.
 
 ```ts title="Examples"
 const okValue = Either.Ok(5);
-const tappedValue = okValue.tap(console.log); // Logs: 5, returns Ok(5)
+const tappedValue = okValue.ifOk(console.log); // Logs: 5, returns Ok(5)
 
 const errorValue = Either.Error("Something went wrong");
-const tappedError = errorValue.tap(console.log); // No log, returns Error("Something went wrong")
+const tappedError = errorValue.ifOk(console.log); // No log, returns Error("Something went wrong")
 ```
 
-### .tapError(fn)
+### .ifError(fn)
 
 ```ts title="Signature"
-Either<O,E>.tapError(fn: (input: E) => void): Either<O, E>
+Either<O,E>.ifError(fn: (input: E) => void): Either<O, E>
 ```
 
 Applies a function to the error inside the `Either` if it is `Error`, without changing the `Either`. If it is `Ok`, the original `Either` is returned unchanged.
 
 ```ts title="Examples"
 const errorValue = Either.Error("Something went wrong");
-const tappedError = errorValue.tapError(console.log); // Logs: Something went wrong, returns Error("Something went wrong")
+const tappedError = errorValue.ifError(console.log); // Logs: Something went wrong, returns Error("Something went wrong")
 
 const okValue = Either.Ok(5);
-const tappedOkValue = okValue.tapError(console.log); // No log, returns Ok(5)
+const tappedOkValue = okValue.ifError(console.log); // No log, returns Ok(5)
 ```
 
 ### .where(matcher)
@@ -199,4 +198,42 @@ const maybeValue = okValue.toMaybe(); // Some(5)
 
 const errorValue = Either.Error("Something went wrong");
 const maybeNone = errorValue.toMaybe(); // None
+```
+
+### .unwrap()
+
+```ts title="Signature"
+Either<O,E>.unwrap()
+```
+
+Returns the value inside the `Either` if the type is `Ok`.
+
+```ts title="Examples"
+function fetchUsers(): Either<User, string>
+
+const users = fetchUsers();
+const users.unwrap() // Won't compile
+
+if(users.isOk()) {
+    users.unwrap() // Returns the User inside the Either
+}
+```
+
+### .unwrapError()
+
+```ts title="Signature"
+Either<O,E>.unwrapError()
+```
+
+Returns the value inside the `Either` if the type is `Error`
+
+```ts title="Examples"
+function fetchUsers(): Either<User, string>
+
+const users = fetchUsers();
+const users.unwrapError() // Won't compile
+
+if(users.isError()) {
+    users.unwrapError() // Returns the string inside the Either
+}
 ```

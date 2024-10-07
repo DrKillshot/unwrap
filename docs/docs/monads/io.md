@@ -4,7 +4,7 @@ sidebar_label: IO
 sidebar_position: 3
 ---
 
-The `IO` monad is for isolating side effects in your program. This monad is **lazy** and will not be evaluated until the `compute` method is called.
+The `IO` monad is for isolating side effects in your program. This monad is **lazy** and will not be evaluated until the `unwrap` method is called.
 
 ## IO constructor
 
@@ -48,19 +48,19 @@ const ioString = IO.of("hello");
 const upperCaseValue = ioString.flatMap(str => IO.of(str.toUpperCase())); // IO("HELLO")
 ```
 
-### .compute()
+### .unwrap()
 
 ```ts title="Signature"
-IO<T>.compute(): T
+IO<T>.unwrap(): T
 ```
 Computes and returns the value inside the `IO`.
 
 ```ts title="Examples"
 const ioValue = IO.of(5);
-console.log(ioValue.compute()); // 5
+console.log(ioValue.unwrap()); // 5
 
 const ioString = IO.of("hello");
-console.log(ioString.compute()); // "hello"
+console.log(ioString.unwrap()); // "hello"
 ```
 
 ### .toMaybe()
@@ -77,5 +77,4 @@ const maybeValue = ioValue.toMaybe(); // Some(5)
 
 const ioNull = IO.of(null);
 const maybeNull = ioNull.toMaybe(); // None
-
 ```

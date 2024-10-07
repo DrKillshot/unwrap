@@ -100,7 +100,7 @@ console.log(noneValue.isPresent()); // false
 
 ### .isEmpty()
 ```ts title="Signature"
-Maybe<T>.isEmpty()
+Maybe<T>.isEmpty(): boolean
 ```
 
 Checks if the `Maybe` is empty.
@@ -120,7 +120,7 @@ console.log(noneValue.isEmpty()); // true
 Maybe<T>.where<S,N>(matcher: {Some: (input: T) => S, None: N}): S | N
 Maybe<T>.where<S,N>(matcher: {Some: S, None: N}): S | N
 ```
-wherees the Maybe to a function based on its state (Some or None).
+This is Unwrap's pattern matching.
 
 ```ts title="Examples"
 const someValue = Maybe.Some(5);
@@ -146,20 +146,20 @@ const result = someValue.where({
 }); // true
 ```
 
-### .tap(fn)
+### .ifPresent(fn)
 
 ```ts title="Signature"
-Maybe<T>.tap(fn: (input: T) => any): Maybe<T>
+Maybe<T>.ifPresent(fn: (input: T) => any): Maybe<T>
 ```
 
 Applies a function to the value inside the `Maybe` if it is `Some`, does nothing otherwise.
 
 ```ts title="Examples"
 const someValue = Maybe.Some(5);
-someValue.tap(x => console.log(x)); // Logs: 5
+someValue.ifPresent(x => console.log(x)); // Logs: 5
 
 const noneValue = Maybe.None();
-noneValue.tap(x => console.log(x)); // Does nothing
+noneValue.ifPresent(x => console.log(x)); // Does nothing
 ```
 
 ### .getWithDefault(defaultValue)
@@ -177,18 +177,18 @@ const noneValue = Maybe.None();
 console.log(noneValue.getWithDefault(10)); // 10
 ```
 
-### .get()
+### .unwrap()
 ```ts title="Signature"
-Maybe<T>.get()
+Maybe<T>.unwrap()
 ```
 
 Returns the value inside the `Maybe` if it is `Some`. 
 
 ```ts title="Examples
 const maybe = Maybe.fromNullable("Hello world!");
-const value = maybe.get();  // does not compile!
+const value = maybe.unwrap();  // does not compile!
 
 if (maybe.isSome()) {
-  const value = maybe.get(); // Hello world!
+  const value = maybe.unwrap(); // Hello world!
 }
 ```
