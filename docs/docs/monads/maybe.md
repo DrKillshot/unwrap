@@ -56,13 +56,13 @@ Maybe<T>.flatMap<R>(fn: (input: T) => Maybe<R>): Maybe<R>
 Transforms the value inside the maybe into another `Maybe` and flattens the result.
 
 ```ts title="Examples"
-const some = Maybe.Some(5);
+const someValue = Maybe.Some(5);
 const newSome = someValue.flatMap(x => Maybe.Some(x * 2)); // Some(10)
 
-const hello = Maybe.Some("Hello world!")
+const helloValue = Maybe.Some("Hello world!")
 const newHello = helloValue.flatMap(s => s.length > 10 ? Maybe.None() : Maybe.Some("") ) // None
 
-const none = Maybe.None();
+const noneValue = Maybe.None();
 const unchangedNone = noneValue.flatMap(x => Maybe.Some(x * 2)); // None
 ```
 
