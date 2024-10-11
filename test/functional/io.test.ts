@@ -1,5 +1,5 @@
-import {IO} from "../../src/functional/io";
-import {Maybe} from "../../src/functional/maybe";
+import { IO } from "../../src/functional/io";
+import { Maybe } from "../../src/functional/maybe";
 
 describe('IO monad', () => {
     describe('Compute operator', () => {
@@ -40,7 +40,7 @@ describe('IO monad', () => {
         })
     })
 
-    describe('ToOption operator', () => {
+    describe('ToMaybe operator', () => {
         it.each([
             1, "Hello world!", [1,2,3], [null, undefined], {name: "An object"}
         ])('should compute the IO and convert it to a Some holding the computed value', (value) => {
