@@ -66,10 +66,10 @@ export interface Either<O, E> {
      * @param matcher Object containing where functions for Ok and Error.
      * @returns The Either of the where function.
      */
-    where<T,R>(matcher: {Ok: (value: O) => T, Error: (value: E) => R}): T | R
-    where<T,R>(matcher: {Ok: T, Error: (value: E) => R}): T | R
-    where<T,R>(matcher: {Ok: (value: O) => T, Error: R}): T | R
-    where<T,R>(matcher: {Ok: T, Error: R}): T | R
+    where<T, R>(matcher: { Ok: (value: O) => T; Error: (value: E) => R }): T | R
+    where<T, R>(matcher: { Ok: T; Error: (value: E) => R }): T | R
+    where<T, R>(matcher: { Ok: (value: O) => T; Error: R }): T | R
+    where<T, R>(matcher: { Ok: T; Error: R }): T | R
 
     /**
      * Converts the Either to a Maybe.
@@ -131,11 +131,14 @@ class Ok<O> implements Either<O, never>, UnwrapOk<O> {
         return this
     }
 
-    where<T,R>(matcher: {Ok: (value: O) => T, Error: (value: never) => R}): T | R
-    where<T,R>(matcher: {Ok: T, Error: (value: never) => R}): T | R
-    where<T,R>(matcher: {Ok: (value: O) => T, Error: R}): T | R
-    where<T,R>(matcher: {Ok: T, Error: R}): T | R {
-        if(typeof matcher.Ok === 'function') {
+    where<T, R>(matcher: {
+        Ok: (value: O) => T
+        Error: (value: never) => R
+    }): T | R
+    where<T, R>(matcher: { Ok: T; Error: (value: never) => R }): T | R
+    where<T, R>(matcher: { Ok: (value: O) => T; Error: R }): T | R
+    where<T, R>(matcher: { Ok: T; Error: R }): T | R {
+        if (typeof matcher.Ok === "function") {
             return matcher.Ok(this.value)
         }
 
@@ -154,7 +157,7 @@ class Ok<O> implements Either<O, never>, UnwrapOk<O> {
 class Error<E> implements Either<never, E>, UnwrapError<E> {
     private constructor(private readonly value: E) {}
 
-    static of<T>(value: T): Error<T>  {
+    static of<T>(value: T): Error<T> {
         return new Error(value)
     }
 
@@ -196,11 +199,14 @@ class Error<E> implements Either<never, E>, UnwrapError<E> {
         return this
     }
 
-    where<T,R>(matcher: {Ok: (value: never) => T, Error: (value: E) => R}): T | R
-    where<T,R>(matcher: {Ok: T, Error: (value: E) => R}): T | R
-    where<T,R>(matcher: {Ok: (value: never) => T, Error: R}): T | R
-    where<T,R>(matcher: {Ok: T, Error: R}): T | R {
-        if(typeof matcher.Error === 'function') {
+    where<T, R>(matcher: {
+        Ok: (value: never) => T
+        Error: (value: E) => R
+    }): T | R
+    where<T, R>(matcher: { Ok: T; Error: (value: E) => R }): T | R
+    where<T, R>(matcher: { Ok: (value: never) => T; Error: R }): T | R
+    where<T, R>(matcher: { Ok: T; Error: R }): T | R {
+        if (typeof matcher.Error === "function") {
             return matcher.Error(this.value)
         }
 
@@ -226,12 +232,21 @@ class __Either {
     }
 
     static fromNullable<T, R>(value: T, defaultVal: R): Error<R> | Ok<T> {
-        if(value == null) {
+        if (value == null) {
             return Error.of(defaultVal)
         }
 
         return Ok.of(value)
     }
+
+    static fromThrowable<T>(fn: () => T): Error<unknown> | Ok<T> {
+        try {
+            return Ok.of(fn())
+        } catch (e) {
+            return Error.of(e)
+        }
+    }
 }
 
 export const Either = __Either
+
