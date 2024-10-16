@@ -165,23 +165,23 @@ const okValue = Either.Ok(5);
 const tappedOkValue = okValue.ifError(console.log); // No log, returns Ok(5)
 ```
 
-### .where(matcher)
+### .match(matcher)
 
 ```ts title="Signature"
-Either<E,O>.where<T, R>(matcher: { Ok: (value: O) => T, Error: (value: E) => R }): T | R;
-Either<E,O>.where<T, R>(matcher: { Ok: (value: O) => T, Error: R }): T | R;
-Either<E,O>.where<T, R>(matcher: { Ok: T, Error: (value: E) => R }): T | R;
-Either<E,O>.where<T, R>(matcher: { Ok: T, Error: R }): T | R;
+Either<E,O>.match<T, R>(matcher: { Ok: (value: O) => T, Error: (value: E) => R }): T | R;
+Either<E,O>.match<T, R>(matcher: { Ok: (value: O) => T, Error: R }): T | R;
+Either<E,O>.match<T, R>(matcher: { Ok: T, Error: (value: E) => R }): T | R;
+Either<E,O>.match<T, R>(matcher: { Ok: T, Error: R }): T | R;
 ```
 
 Matches the `Either` to a function or value based on its state (`Ok` or `Error`). This allows handling both states of the `Either` in a single call.
 
 ```ts title="Examples"
 const okValue = Either.Ok(5);
-const matchedOk = okValue.where({ Ok: value => value * 2, Error: err => `Error: ${err}` }); // 10
+const matchedOk = okValue.match({ Ok: value => value * 2, Error: err => `Error: ${err}` }); // 10
 
 const errorValue = Either.Error("Something went wrong");
-const matchedError = errorValue.where({ Ok: value => value * 2, Error: err => `Error: ${err}` }); // "Error: Something went wrong"
+const matchedError = errorValue.match({ Ok: value => value * 2, Error: err => `Error: ${err}` }); // "Error: Something went wrong"
 ```
 
 ### .toMaybe()

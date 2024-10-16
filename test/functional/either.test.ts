@@ -335,7 +335,7 @@ describe("Either monad", () => {
         })
     })
 
-    describe("Where operator", () => {
+    describe("Match operator", () => {
         it.each([
             [Either.Ok(1), { Ok: (x: number) => x + 1, Error: 0 }, 2],
             [Either.Ok(1), { Ok: true, Error: false }, true],
@@ -359,9 +359,9 @@ describe("Either monad", () => {
             "should apply the some branch when maybe holds value and the none branch otherwise",
             (result, matcher, final) => {
                 // @ts-ignore
-                const where = result.where(matcher)
+                const match = result.match(matcher)
 
-                expect(where).toEqual(final)
+                expect(match).toEqual(final)
             },
         )
     })

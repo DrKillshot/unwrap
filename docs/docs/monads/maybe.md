@@ -114,23 +114,23 @@ console.log(noneValue.isEmpty()); // true
 
 ```
 
-### .where()
+### .match()
 
 ```ts title="Signature"
-Maybe<T>.where<S,N>(matcher: {Some: (input: T) => S, None: N}): S | N
-Maybe<T>.where<S,N>(matcher: {Some: S, None: N}): S | N
+Maybe<T>.match<S,N>(matcher: {Some: (input: T) => S, None: N}): S | N
+Maybe<T>.match<S,N>(matcher: {Some: S, None: N}): S | N
 ```
-This is Unwrap's pattern matching.
+Matches the `Maybe` to a function or value based on its state (`Some` or `None`). This allows handling both states of the `Maybe` in a single call.
 
 ```ts title="Examples"
 const someValue = Maybe.Some(5);
-const result = someValue.where({
+const result = someValue.match({
     Some: x => `Value is ${x}`,
     None: 'No value'
 }); // "Value is 5"
 
 const noneValue = Maybe.None();
-const resultNone = noneValue.where({
+const resultNone = noneValue.match({
     Some: x => `Value is ${x}`,
     None: 'No value'
 }); // "No value"
@@ -140,7 +140,7 @@ If you your `Some` operation does not depend on the maybe value you can do, for 
 
 ```ts title="Example"
 const someValue = Maybe.Some(5);
-const result = someValue.where({
+const result = someValue.match({
     Some: true,
     None: false
 }); // true

@@ -63,13 +63,13 @@ export interface Either<O, E> {
 
     /**
      * Matches the Either to a function based on its state (Ok or Error).
-     * @param matcher Object containing where functions for Ok and Error.
-     * @returns The Either of the where function.
+     * @param matcher Object containing match functions for Ok and Error.
+     * @returns The Either of the match function.
      */
-    where<T, R>(matcher: { Ok: (value: O) => T; Error: (value: E) => R }): T | R
-    where<T, R>(matcher: { Ok: T; Error: (value: E) => R }): T | R
-    where<T, R>(matcher: { Ok: (value: O) => T; Error: R }): T | R
-    where<T, R>(matcher: { Ok: T; Error: R }): T | R
+    match<T, R>(matcher: { Ok: (value: O) => T; Error: (value: E) => R }): T | R
+    match<T, R>(matcher: { Ok: T; Error: (value: E) => R }): T | R
+    match<T, R>(matcher: { Ok: (value: O) => T; Error: R }): T | R
+    match<T, R>(matcher: { Ok: T; Error: R }): T | R
 
     /**
      * Converts the Either to a Maybe.
@@ -131,13 +131,13 @@ class Ok<O> implements Either<O, never>, UnwrapOk<O> {
         return this
     }
 
-    where<T, R>(matcher: {
+    match<T, R>(matcher: {
         Ok: (value: O) => T
         Error: (value: never) => R
     }): T | R
-    where<T, R>(matcher: { Ok: T; Error: (value: never) => R }): T | R
-    where<T, R>(matcher: { Ok: (value: O) => T; Error: R }): T | R
-    where<T, R>(matcher: { Ok: T; Error: R }): T | R {
+    match<T, R>(matcher: { Ok: T; Error: (value: never) => R }): T | R
+    match<T, R>(matcher: { Ok: (value: O) => T; Error: R }): T | R
+    match<T, R>(matcher: { Ok: T; Error: R }): T | R {
         if (typeof matcher.Ok === "function") {
             return matcher.Ok(this.value)
         }
@@ -199,13 +199,13 @@ class Error<E> implements Either<never, E>, UnwrapError<E> {
         return this
     }
 
-    where<T, R>(matcher: {
+    match<T, R>(matcher: {
         Ok: (value: never) => T
         Error: (value: E) => R
     }): T | R
-    where<T, R>(matcher: { Ok: T; Error: (value: E) => R }): T | R
-    where<T, R>(matcher: { Ok: (value: never) => T; Error: R }): T | R
-    where<T, R>(matcher: { Ok: T; Error: R }): T | R {
+    match<T, R>(matcher: { Ok: T; Error: (value: E) => R }): T | R
+    match<T, R>(matcher: { Ok: (value: never) => T; Error: R }): T | R
+    match<T, R>(matcher: { Ok: T; Error: R }): T | R {
         if (typeof matcher.Error === "function") {
             return matcher.Error(this.value)
         }
