@@ -1,6 +1,6 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import type { Config } from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
 
 const config: Config = {
   title: 'Unwrap',
@@ -73,7 +73,7 @@ const config: Config = {
       },
       items: [
         {to: '/unwrap/docs/library/getting-started', label: 'Getting started', position: 'left'},
-        {to: '/unwrap/docs/monads/maybe' ,position: 'left', label: 'API'},
+        {to: '/unwrap/docs/category/containers' ,position: 'left', label: 'API'},
         {
           href: 'https://github.com/DrKillshot/unwrap',
           label: 'GitHub',

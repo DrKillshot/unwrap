@@ -4,7 +4,7 @@ sidebar_label: Maybe
 sidebar_position: 1
 ---
 
-The `Maybe` monad may or may not hold some value. It is commonly used to represent optional values.
+The `Maybe` container may or may not hold some value. It is commonly used to represent optional values.
 
 ## Maybe constructors
 
@@ -30,7 +30,7 @@ Maybe.fromNullable(undefined) // None
 
 ## Methods
 
-The `Maybe` monad exposes several methods for value manipulation
+The `Maybe` container exposes several methods for value manipulation
 
 ### .map(fn)
 
