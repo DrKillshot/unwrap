@@ -1,8 +1,6 @@
-import { afterEach, describe } from "@jest/globals";
-import { Either } from "../../src/functional/either";
-import { Maybe } from "../../src/functional/maybe";
+import { Either, Maybe } from "../../src/index";
 
-describe('Maybe Monad', () => {
+describe('Maybe Container', () => {
     describe('Maybe constructors', () => {
         it.each([null, undefined])('should yield a None when `fromNullable` is called with %s', (value: null | undefined) => {
             const result = Maybe.fromNullable(value)
@@ -14,7 +12,7 @@ describe('Maybe Monad', () => {
             1,
             "Hello World!",
             () => {console.log('')},
-            {name: "Maybe Monad", description: "Holds an Maybeal value"},
+            {name: "Maybe Container", description: "Holds a Maybe value"},
             [1, "Hello", {isObject: true, name: "Just an object"}, () => 1],
             [null, null, null, null]
         ])('should yield a Some when `fromNullable` is called with any non nullable value `%s`', (value) => {

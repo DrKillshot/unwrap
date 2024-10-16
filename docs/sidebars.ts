@@ -1,4 +1,4 @@
-import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   docs: [
     {
@@ -14,15 +14,15 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Monads',
+      label: 'Containers',
       link: {
         type: 'generated-index',
       },
       collapsed: false,
       items: [
-          'monads/maybe',
-          'monads/either',
-          'monads/io'
+          'containers/maybe',
+          'containers/either',
+          'containers/io'
       ]
     }
     ]

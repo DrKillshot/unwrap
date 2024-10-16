@@ -4,11 +4,11 @@ sidebar_label: Either
 sidebar_position: 2
 ---
 
-The `Either` monad can hold two types of values: an `Ok(value)` value and an `Error(error)` value. The `Either` monad is typically use to **replace exceptions** in the codebase and make each method more explicit and declarative in its `Either`.
+The `Either` container can hold two types of values: an `Ok(value)` value and an `Error(error)` value. The `Either` container is typically use to **replace exceptions** in the codebase and make each method more explicit and declarative in its `Either`.
 
 ## Either constructors
 
-Just like `Maybe`, the `Either` monad can be instantiated with specific constructors. In this case the `Ok(value)` and `Error(error)` constructor:
+Just like `Maybe`, the `Either` container can be instantiated with specific constructors. In this case the `Ok(value)` and `Error(error)` constructor:
 
 ```ts title="Examples"
 const anOk = Either.Ok(10)
@@ -20,7 +20,7 @@ const anError<string> = Either<string>("Something went wrong here!")
 ```
 ## Methods
 
-The `Either` monad exposes several methods for value manipulation
+The `Either` container exposes several methods for value manipulation
 
 ### .map(fn)
 
@@ -190,7 +190,7 @@ const matchedError = errorValue.match({ Ok: value => value * 2, Error: err => `E
 Either<O,E>.toMaybe(): Maybe<O>
 ```
 
-Converts the `Either` to a `Maybe` monad. If the `Either` is `Ok`, the `Maybe` contains the value. If it is `Error`, it returns `Maybe.None()`.
+Converts the `Either` to a `Maybe` container. If the `Either` is `Ok`, the `Maybe` contains the value. If it is `Error`, it returns `Maybe.None()`.
 
 ```ts title="Examples"
 const okValue = Either.Ok(5);

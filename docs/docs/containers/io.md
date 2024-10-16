@@ -4,7 +4,7 @@ sidebar_label: IO
 sidebar_position: 3
 ---
 
-The `IO` monad is for isolating side effects in your program. This monad is **lazy** and will not be evaluated until the `unwrap` method is called.
+The `IO` container is for isolating side effects in your program. This container is **lazy** and will not be evaluated until the `unwrap` method is called.
 
 ## IO constructor
 
@@ -17,7 +17,7 @@ const aNumber = IO.of(3) // IO(3)
 ```
 
 ## Methods
-The `IO` monad exposes several methods for value manipulation
+The `IO` container exposes several methods for value manipulation
 
 ### .map(fn)
 

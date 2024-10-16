@@ -1,5 +1,5 @@
-import {Maybe} from "./functional/maybe";
-import {Either} from "./functional/either";
-import {IO} from "./functional/io";
+import { Either } from "./containers/either";
+import { IO } from "./containers/io";
+import { Maybe } from "./containers/maybe";
 
-export {Maybe, Either, IO}
+export { Either, IO, Maybe };

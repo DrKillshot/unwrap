@@ -2,7 +2,7 @@
 
 # @unnullable/unwrap
 
-Unwrap exposes functional programming monads with a syntactic sugar to help create more expressive and declarative web applications.
+Unwrap exposes functional programming concepts with syntactic sugar to help create more expressive and declarative web applications.
 
 ## What's to unwrap?
 - `Maybe<Value>`

@@ -1,7 +1,6 @@
-import { IO } from "../../src/functional/io";
-import { Maybe } from "../../src/functional/maybe";
+import { IO, Maybe } from "../../src/index";
 
-describe('IO monad', () => {
+describe('IO Container', () => {
     describe('Compute operator', () => {
         it.each([
             [1,2,3], 10, "Hello world!"

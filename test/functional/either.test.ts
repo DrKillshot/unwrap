@@ -1,7 +1,6 @@
-import { Either } from "../../src/functional/either"
-import { Maybe } from "../../src/functional/maybe"
+import { Either, Maybe } from "../../src/index"
 
-describe("Either monad", () => {
+describe("Either container", () => {
     describe("Either constructors", () => {
         it.each([1, [1, 2, 3], "Hello world!", { name: "Object name" }])(
             'should create an Ok container when fromNullable is called "%s',
