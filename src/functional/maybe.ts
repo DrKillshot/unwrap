@@ -1,4 +1,4 @@
-import {Either} from "./either";
+import { Either } from "./either";
 
 export interface Maybe<T> {
     /**
@@ -37,10 +37,10 @@ export interface Maybe<T> {
     /**
      * Matches the Maybe to a function based on its state (Some or None).
      * @param matcher Object containing where functions for Some and None.
-     * @returns The result of the where function.
+     * @returns The result of the matcher.
      */
-    where<S,N>(matcher: {Some: (input: T) => S, None: N}): S | N
-    where<S,N>(matcher: {Some: S, None: N}): S | N
+    match<S,N>(matcher: {Some: (input: T) => S, None: N}): S | N
+    match<S,N>(matcher: {Some: S, None: N}): S | N
 
     /**
      * Applies a function to the value inside the Maybe if it is Some, does nothing otherwise.
@@ -99,8 +99,8 @@ class Some<T> implements Maybe<T>, Unwrap<T> {
         return false
     }
 
-    where<S,N>(matcher: {Some: S, None: N}): S | N
-    where<S, N>(matcher: { Some: (input: T) => S; None: N }): S | N {
+    match<S,N>(matcher: {Some: S, None: N}): S | N
+    match<S, N>(matcher: { Some: (input: T) => S; None: N }): S | N {
         if(typeof matcher.Some === 'function') {
             return matcher.Some(this.value)
         }
@@ -148,8 +148,8 @@ class None implements Maybe<never> {
         return true
     }
 
-    where<S, N>(matcher: { Some: S, None: N }): S | N
-    where<S, N>(matcher: { Some: (input: never) => S; None: N }): S | N {
+    match<S, N>(matcher: { Some: S, None: N }): S | N
+    match<S, N>(matcher: { Some: (input: never) => S; None: N }): S | N {
         return matcher.None
     }
 

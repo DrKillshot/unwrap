@@ -1,6 +1,6 @@
-import {Maybe} from "../../src/functional/maybe";
-import {afterEach, describe} from "@jest/globals";
-import {Either} from "../../src/functional/either";
+import { afterEach, describe } from "@jest/globals";
+import { Either } from "../../src/functional/either";
+import { Maybe } from "../../src/functional/maybe";
 
 describe('Maybe Monad', () => {
     describe('Maybe constructors', () => {
@@ -113,15 +113,15 @@ describe('Maybe Monad', () => {
         })
     })
 
-    describe('Where operator', () => {
+    describe('Match operator', () => {
         it.each([
             [Maybe.Some(1), {Some: (x: number) => x + 1, None: 0}, 2],
             [Maybe.Some(1), {Some: true, None: true}, true],
             [Maybe.None(), {Some: () => true, None: false}, false],
             [Maybe.Some([null, null, undefined]), {Some: (arr: (null | undefined)[]) => arr.map(elem => elem == null), None: false}, [true, true, true]],
-        ])('should apply the some branch when Maybe holds value and the none branch otherwise', (Maybe, whereer, final) => {
+        ])('should apply the some branch when Maybe holds value and the none branch otherwise', (Maybe, matcher, final) => {
             // @ts-ignore
-            const result = Maybe.where(whereer)
+            const result = Maybe.match(matcher)
 
             expect(result).toEqual(final)
         })
