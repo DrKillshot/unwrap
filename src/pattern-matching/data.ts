@@ -1,5 +1,5 @@
-const Empty = Symbol()
-export type Empty = typeof Empty
+export const Empty = Symbol()
+type Empty = typeof Empty
 
 type AnyFunction = (...args: any) => any
 type DataObject = { [key: string]: Empty | AnyFunction }
@@ -60,38 +60,3 @@ export function Data<Obj extends DataObject>(dataObject: Obj): Data<Obj> {
 
     return data
 }
-
-/* Use Case
-const data = Data({
-    Success: (id: number, username: string) => ({id, username}),
-    Failure: (error: string) => error,
-    Pending: Empty
-})
-
-const success = data.Success(10, "john.doe")
-const error = data.Failure("There has been a network failure")
-const pending = data.Pending
-
-success.match({
-    Success: ({id, username}) => console.log(`Payload received. {id: ${id}, username: ${username}}`),
-    Failure: (error) => console.log(`There has been an error. Error: ${error}`),
-    Pending: () => console.log("The request is still pending, please wait.")
-})
-
-error.match({
-    Success: ({id, username}) => console.log(`Payload received. {id: ${id}, username: ${username}}`),
-    Failure: (error) => console.log(`There has been an error. Error: ${error}`),
-    Pending: () => console.log("The request is still pending, please wait.")
-})
-
-pending.match({
-    Success: ({id, username}) => console.log(`Payload received. {id: ${id}, username: ${username}}`),
-    Failure: (error) => console.log(`There has been an error. Error: ${error}`),
-    Pending: () => console.log("The request is still pending, please wait.")
-})
-
-success.match({
-    Pending: () => console.log("The request is still pending, please wait."),
-    _: () => console.log("Default case")
-})
-*/
