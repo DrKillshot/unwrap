@@ -1,8 +1,4 @@
----
-title: Maybe<Value>
-sidebar_label: Maybe
-sidebar_position: 1
----
+# Maybe\<Value\>
 
 The `Maybe` container may or may not hold some value. It is commonly used to represent optional values.
 

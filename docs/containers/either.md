@@ -1,8 +1,4 @@
----
-title: Either<Ok, Error>
-sidebar_label: Either
-sidebar_position: 2
----
+# Either\<Ok, Error\>
 
 The `Either` container can hold two types of values: an `Ok(value)` value and an `Error(error)` value. The `Either` container is typically use to **replace exceptions** in the codebase and make each method more explicit and declarative in its `Either`.
 
