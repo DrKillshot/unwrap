@@ -6,7 +6,7 @@ export default defineConfig({
   description: "Unwrap library documentation",
   base: '/unwrap/',
   head: [
-    ['link', { rel: 'icon', href: '/public/favicon.ico' }]
+    ['link', { rel: 'icon', href: '/unwrap/favicon.ico' }]
   ],
   themeConfig: {
     logo: '/unwrap.png',
@@ -19,7 +19,11 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Getting Started', link: '/learn/getting-started' },
       { 
-        text: 'API', link: '/containers/maybe',
+        text: 'API',
+        items: [
+          { text: "Containers", link: '/containers/maybe' },
+          { text: "Pattern matching", link: '/pattern-matching/data' }
+        ]
       }
     ],
 
@@ -36,6 +40,12 @@ export default defineConfig({
           { text: "Maybe&lt;Value&gt;", link: '/containers/maybe' },
           { text: "Either&lt;Ok, Error&gt;", link: '/containers/either' },
           { text: "IO&lt;Operation&gt;", link: '/containers/io' }
+        ]
+      },
+      {
+        text: "Pattern Matching",
+        items: [
+          { text: "Data type", link: '/pattern-matching/data' }
         ]
       }
     ],
