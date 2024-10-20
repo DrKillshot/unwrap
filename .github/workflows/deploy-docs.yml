@@ -28,7 +28,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
-        run: npm install --no-frozen-lockfile
+        run: npm ci --no-frozen-lockfile
       - name: Build with VitePress
         run: npm run docs:build 
       - name: Upload artifact
@@ -42,7 +42,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
-    name: Deploy
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
