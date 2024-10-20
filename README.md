@@ -1,4 +1,4 @@
-![Unwrap](./docs/static/unwrap.png)
+![Unwrap](./docs/public/unwrap.png)
 
 # @unnullable/unwrap
 
