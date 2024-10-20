@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[583],{6866:(s,t,e)=>{e.r(t),e.d(t,{default:()=>u});var r=e(4586),n=e(6347),c=e(4848);function u(){const{siteConfig:s}=(0,r.A)();return(0,c.jsx)(n.rd,{to:"/unwrap/docs/Library/getting-started"})}}}]);
