@@ -1,8 +1,4 @@
----
-title: IO<Operation>
-sidebar_label: IO
-sidebar_position: 3
----
+# IO\<Operation\>
 
 The `IO` container is for isolating side effects in your program. This container is **lazy** and will not be evaluated until the `unwrap` method is called.
 
