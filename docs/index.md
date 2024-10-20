@@ -22,7 +22,7 @@ features:
   - title: Better error handling
     icon: 🤝
     details: Utilities for managing functions that might throw errors, allowing you to handle errors in a structured way, rather than relying on traditional try-catch blocks.
-  # TODO: Add this when pattern matching is available in docs
-  #- title: Pattern matching
-  #  details: Simplifies working with complex union types by enabling concise pattern matching. Handle different shapes of data in a more readable way, similar to languages like Scala or Haskell.
+  - title: Pattern matching
+    icon: 🔥
+    details: Simplifies working with complex union types by enabling concise pattern matching. Handle different shapes of data in a more readable way, similar to languages like Scala or Haskell.
 ---
