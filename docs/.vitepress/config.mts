@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Unwrap",
   description: "Unwrap library documentation",
+  base: '/unwrap/',
   head: [
     ['link', { rel: 'icon', href: '/public/favicon.ico' }]
   ],
