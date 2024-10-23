@@ -15,12 +15,12 @@ const NotEmpty = Brand.define<Brand.type<"NotEmpty", string>>(
     "Expected a non-empty string."
 )
 
-const NotNull = Brand.define<Brand.type<"NotNull", null>>(
+const NotNull = Brand.define<Brand.type<"NotNull", Exclude<any, null>>>(
     obj => obj !== null,
     "Expected a not null element"
 )
 
-const NotUndefined = Brand.define<Brand.type<"Defined", undefined>>(
+const NotUndefined = Brand.define<Brand.type<"Defined", Exclude<any, undefined>>>(
     obj => obj !== undefined,
     "Expected a defined element"
 )
