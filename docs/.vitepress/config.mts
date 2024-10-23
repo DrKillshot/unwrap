@@ -22,7 +22,8 @@ export default defineConfig({
         text: 'API',
         items: [
           { text: "Containers", link: '/containers/maybe' },
-          { text: "Pattern matching", link: '/pattern-matching/data' }
+          { text: "Pattern matching", link: '/pattern-matching/data' },
+          { text: "Branded types", link: "/branded-types/intro" }
         ]
       }
     ],
@@ -46,6 +47,15 @@ export default defineConfig({
         text: "Pattern Matching",
         items: [
           { text: "Data type", link: '/pattern-matching/data' }
+        ]
+      },
+      {
+        text: "Branded types",
+        items: [
+          { text: "Introduction", link: '/branded-types/intro' },
+          { text: "Create", link: '/branded-types/create' },
+          { text: "Define", link: '/branded-types/define' },
+          { text: "Combine", link: '/branded-types/combine' },
         ]
       }
     ],
