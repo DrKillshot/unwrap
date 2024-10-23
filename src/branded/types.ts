@@ -38,8 +38,3 @@ export namespace Brand {
         }
     }
 }
-
-/* TODO: Method to create the oposite constructor. Example: 
-const Integer = Brand.define<Brand.type<"Integer", number>>(n => Number.isInteger(n), n => `Expected an integer. Instead got ${n}`)
-const NonInteger = OpositeMehtod(Integer)
-*/

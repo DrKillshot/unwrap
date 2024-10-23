@@ -210,6 +210,51 @@ describe("Branded types", () => {
             }
         })
 
-        // TODO: Add cases where this throws
+        it.each([
+            [
+               [Positive, Integer],
+               [Number.MIN_VALUE, -Number.MIN_VALUE, -10, 10.4],
+            ],
+            [
+                [NonNegative, Integer],
+                [-Number.MIN_VALUE, 1 + 1e-10]
+            ],
+            [
+                [Email, InternalEmail],
+                ["john.doe@my-companycom", "john.doe@other-company.com"]
+            ],
+            [
+                [NotNull, NotUndefined],
+                [null, undefined]
+            ],
+            [
+                [NotEmpty, URL, RelativeURL],
+                ["", "http://www.my-domain.com", "https://www.my-domain.com"]
+            ],
+            [
+                [NotEmpty, URL, AbsoluteURL],
+                ["/", "/home"]
+            ],
+            [
+                [Local, PhoneNumber],
+                ["+44 123-456-7890"]
+            ],
+            [
+                [International, PhoneNumber],
+                ["123-456-7890"]
+            ],
+            [
+                [Negative, Integer, MultipleOfTen],
+                [10, 100, 1000, 10000, 10e20]
+            ],
+            [
+                [Positive, NonInteger, LessThanOne],
+                [2, 1 + 10e-10, -Number.MAX_SAFE_INTEGER, -Number.MIN_VALUE]
+            ]
+        ])('should create a combined constructor and throw when definition criteria is not met', (constructors: any[], args: any) => {
+            for(const arg of args) {
+                expect(() => Brand.combine<"CombinedType", any>(...constructors)(arg)).toThrow()
+            }
+        })
     })
 })
