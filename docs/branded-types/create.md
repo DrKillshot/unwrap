@@ -1,6 +1,6 @@
 # Create constructor
 
-As discussed in the previous section, a branded type is a way to add a unique label to a primitive type, ensuring that values of different branded types are not interchangeable. 
+As discussed in the [previous section](/branded-types/intro.html), a branded type is a way to add a unique label to a primitive type, ensuring that values of different branded types are not interchangeable. 
 
 ## .type\<brand, primitive\>
 

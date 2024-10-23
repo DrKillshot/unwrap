@@ -2,7 +2,7 @@
 
 Branded types provide a way to distinguish between different types that share the same underlying structure. This technique enhances type safety without impacting runtime performance.
 
-In TypeScript, types are typically "structurally typed," meaning that if two types have the same shape or structure, they are considered interchangeable. However, this can lead to issues when different concepts share the same structure but should not be used interchangeably. Branded types offer a way to create nominal typing in TypeScript, where a type is differentiated by a unique "brand" rather than just its structure.
+In TypeScript, types are typically *structurally typed,* meaning that if two types have the same shape or structure, they are considered interchangeable. However, this can lead to issues when different concepts share the same structure but should not be used interchangeably. Branded types offer a way to create *nominal typing* in TypeScript, where a type is differentiated by a unique **brand** rather than just its structure.
 
 Nominal typing means that types are considered distinct even if they have the same structure, which helps prevent unintended mix-ups. For example, with nominal typing, two types like `UserId` and `ProductId` can both be strings but are not interchangeable due to their unique brands.
 
