@@ -196,6 +196,42 @@ const errorValue = Either.Error("Something went wrong");
 const maybeNone = errorValue.toMaybe(); // None
 ```
 
+### .fromThrowable(fn)
+
+```ts title="Signature"
+Either<O,E>.fromThrowable<T>(fn: () => T): Error<unknown> | Ok<T>
+```
+
+Returns an `Ok` type with the value returned by the function and an `Error` if the function throws.
+
+```ts title="Examples"
+function divide(a: number, b: number): number {
+    if (b === 0) {
+        throw "Cannot divide by zero!"
+    }else {
+        return a/b
+    }
+}
+
+Either.fromThrowable(() => divide(10, 2)) // Ok<5>
+
+Either.fromThrowable(() => divide(10, 0)) // Error<"Cannot divide by zero!">
+```
+
+### .throw()
+
+```ts
+Either<O,E>.throw()
+```
+
+Throws an error when `Either` is of type `Error` and does nothing otherwise.
+
+```ts
+Either.ok(10).throw() // Does nothing
+
+Either.Error("An error has occurred") // Throws error with message "An error has occurred"
+```
+
 ### .unwrap()
 
 ```ts title="Signature"
@@ -232,26 +268,4 @@ const users.unwrapError() // Won't compile
 if(users.isError()) {
     users.unwrapError() // Returns the string inside the Either
 }
-```
-
-### .fromThrowable(fn)
-
-```ts title="Signature"
-Either<O,E>.fromThrowable<T>(fn: () => T): Error<unknown> | Ok<T>
-```
-
-Returns an `Ok` type with the value returned by the function and an `Error` if the function throws.
-
-```ts title="Examples"
-function divide(a: number, b: number): number {
-    if (b === 0) {
-        throw "Cannot divide by zero!"
-    }else {
-        return a/b
-    }
-}
-
-Either.fromThrowable(() => divide(10, 2)) // Ok<5>
-
-Either.fromThrowable(() => divide(10, 0)) // Error<"Cannot divide by zero!">
 ```
