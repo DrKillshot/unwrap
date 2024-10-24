@@ -72,6 +72,11 @@ export interface Either<O, E> {
     match<T, R>(matcher: { Ok: T; Error: R }): T | R
 
     /**
+     * Throws an error if the Either is Error and does nothing otherwise
+     */
+    throw(): void
+
+    /**
      * Converts the Either to a Maybe.
      * @returns An Maybe containing the value inside the Either if it is Ok, otherwise None.
      */
@@ -145,6 +150,8 @@ class Ok<O> implements Either<O, never>, UnwrapOk<O> {
         return matcher.Ok
     }
 
+    throw() {}
+
     toMaybe(): Maybe<O> {
         return Maybe.fromNullable(this.value)
     }
@@ -211,6 +218,10 @@ class Error<E> implements Either<never, E>, UnwrapError<E> {
         }
 
         return matcher.Error
+    }
+
+    throw() {
+        throw new Error(this.value)
     }
 
     toMaybe(): Maybe<never> {

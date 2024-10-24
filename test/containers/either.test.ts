@@ -1,4 +1,5 @@
 import { Either, Maybe } from "../../src/index"
+import {describe} from "@jest/globals";
 
 describe("Either container", () => {
     describe("Either constructors", () => {
@@ -363,6 +364,28 @@ describe("Either container", () => {
                 expect(match).toEqual(final)
             },
         )
+    })
+
+    describe("Throw operator", () => {
+        it.each([
+            Either.Ok(1),
+            Either.Ok([1, 2, 3]),
+            Either.Ok("Hello world!"),
+            Either.Ok({ name: "An object" }),
+            Either.Ok([null, undefined])
+        ])('should not throw when Either is of type Ok. Case: %s', (result) => {
+            expect(() => result.throw()).not.toThrow()
+        })
+
+        it.each([
+            Either.Error(1),
+            Either.Error([1, 2, 3]),
+            Either.Error("Hello world!"),
+            Either.Error({ name: "An object" }),
+            Either.Error([null, undefined])
+        ])('should throw when Either is of type Error. Case: %s', (result) => {
+            expect(() => result.throw()).toThrow()
+        })
     })
 
     describe("To maybe operator", () => {
