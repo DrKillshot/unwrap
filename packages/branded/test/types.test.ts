@@ -1,4 +1,4 @@
-import { Brand } from "../../src/index";
+import { Brand } from "../src";
 
 const Integer = Brand.define<Brand.type<"Integer", number>>(
     n => Number.isInteger(n),

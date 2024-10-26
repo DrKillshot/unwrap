@@ -1,4 +1,4 @@
-import { Either, Maybe } from "../../src/index";
+import { Either, Maybe } from "../src";
 
 describe('Maybe Container', () => {
     describe('Maybe constructors', () => {

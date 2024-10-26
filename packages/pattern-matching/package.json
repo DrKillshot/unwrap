@@ -1,0 +1,10 @@
+{
+  "name": "@unnullable/pattern-matching",
+  "version": "1.0.0",
+  "main": "./dist/pattern-matching/index.js",
+  "module": "./dist/pattern-matching/index.mjs",
+  "types": "./dist/pattern-matching/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --dts"
+  }
+}

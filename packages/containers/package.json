@@ -1,0 +1,10 @@
+{
+  "name": "@unnullable/unwrap-containers",
+  "version": "1.0.0",
+  "main": "./dist/containers/index.js",
+  "module": "./dist/containers/index.mjs",
+  "types": "./dist/containers/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --dts"
+  }
+}

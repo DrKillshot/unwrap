@@ -1,0 +1,10 @@
+{
+  "name": "@unnullable/unwrap-branded",
+  "version": "1.0.0",
+  "main": "./dist/branded/index.js",
+  "module": "./dist/branded/index.mjs",
+  "types": "./dist/branded/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --dts"
+  }
+}

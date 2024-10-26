@@ -1,13 +1,8 @@
 {
   "name": "@unnullable/unwrap",
-  "version": "1.5.4",
+  "version": "2.0.0",
   "description": "A functional programming library for typescript developers",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup",
     "test": "jest",
@@ -15,6 +10,11 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
+  },
+  "exports": {
+    "./containers": "./dist/containers/src/index.js",
+    "./branded": "./dist/branded/src/index.js",
+    "./pattern-matching": "./dist/pattern-matching/src/index.js"
   },
   "keywords": [
     "functional programming",

@@ -1,5 +1,4 @@
-import { Either, Maybe } from "../../src/index"
-import {describe} from "@jest/globals";
+import { Either, Maybe } from "../src"
 
 describe("Either container", () => {
     describe("Either constructors", () => {

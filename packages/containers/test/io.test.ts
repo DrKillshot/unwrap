@@ -1,4 +1,4 @@
-import { IO, Maybe } from "../../src/index";
+import { IO, Maybe } from "../src";
 
 describe('IO Container', () => {
     describe('Compute operator', () => {

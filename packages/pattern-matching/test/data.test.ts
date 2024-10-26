@@ -1,4 +1,4 @@
-import { Data, Empty } from '../../src/index';
+import { Data, Empty } from '../src';
 
 describe('Data type', () => {
     it('should pick the correct non empty case', () => {
