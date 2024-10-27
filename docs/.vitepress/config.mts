@@ -56,6 +56,7 @@ export default defineConfig({
           { text: "Create", link: '/branded-types/create' },
           { text: "Define", link: '/branded-types/define' },
           { text: "Combine", link: '/branded-types/combine' },
+          { text: "Out of the box types", link: '/branded-types/out-of-the-box-types.md' }
         ]
       }
     ],
