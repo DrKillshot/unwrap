@@ -3,6 +3,8 @@
 As discussed in the previous section, we can compose simpler types into more complex ones. So you don't have to create
 simple types like `Integer` for every code base, Unwrap gives you some types out of the box.
 
+If you want us to add more please let us know in our [GitHub issues](https://github.com/DrKillshot/unwrap/issues) page.
+
 ## Numbers
 
 ```ts
