@@ -16,12 +16,14 @@ Brand.Number.Positive // Positive number
 Brand.Number.Negative // Negative number
 Brand.Number.NonNegative // Number greater or equal to zero
 Brand.Number.Digit // Number between 0 and 10
+Brand.Number.Between<min, max> // Number between min and max
 ```
 
 ## Strings
 
 ```ts
 Brand.String.NotEmpty // String with at least one non white space
+Brand.String.Between<min, max> // String with length between min and max
 ```
 
 ## Nullable

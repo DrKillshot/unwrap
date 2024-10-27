@@ -1,6 +1,6 @@
 {
   "name": "@unnullable/unwrap",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A functional programming library for typescript developers",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

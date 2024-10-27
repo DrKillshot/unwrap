@@ -65,7 +65,7 @@ export namespace Brand {
 
         export type Digit = Brand.type<"Digit", number>
         export const Digit = Brand.define<Digit>(
-            d => d >= 0 && d <= 10,
+            d => isInteger(d) && d >= 0 && d <= 9,
             d => `Expected a digit. Instead got: ${d}`
         )
 
@@ -74,6 +74,17 @@ export namespace Brand {
             n => n < 0,
             n => `Expected a negative number. Instead got: ${n}`
         )
+
+        export type Between<Min extends number, Max extends number> = Brand.type<`NumberBetween<${Min},${Max}>`, number>;
+        export function Between<Min extends number, Max extends number>(
+            min: Min,
+            max: Max
+        ) {
+            return Brand.define<Between<Min, Max>>(
+                (n) => n >= min && n <= max,
+                (n) => `Expected a number between ${min} and ${max}. Instead got: ${n}`
+            );
+        }
     }
 
     export namespace String {
@@ -82,6 +93,20 @@ export namespace Brand {
             str => str.trim().length != 0,
             `Expected a non-empty string.`
         )
+
+        export type Between<Min extends number, Max extends number> = Brand.type<`StringBetween<${Min},${Max}>`, string>;
+        export function Between<Min extends number, Max extends number>(
+            min: Min,
+            max: Max
+        ) {
+            if (min < 0) throw new Error("The minimum bound for a string length must be greater or equal to zero.")
+            if (!isInteger(min) || !isInteger(max)) throw new Error("The minimum and maximum bound need to be integers.")
+
+            return Brand.define<Between<Min, Max>>(
+                (str) => str.length >= min && str.length <= max,
+                (n) => `Expected a string with length between ${min} and ${max}. Instead got: ${n}`
+            );
+        }
     }
 
     export namespace Nullable {
