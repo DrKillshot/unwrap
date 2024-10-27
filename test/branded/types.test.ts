@@ -1,29 +1,4 @@
-import { Brand } from "../../src/index";
-
-const Integer = Brand.define<Brand.type<"Integer", number>>(
-    n => Number.isInteger(n),
-    n => `Expected an integer. Instead got ${n}`
-)
-
-const Positive = Brand.define<Brand.type<"Positive", number>>(
-    n => n > 0,
-    n => `Expected a positive number. Instead got: ${n}`
-)
-
-const NotEmpty = Brand.define<Brand.type<"NotEmpty", string>>(
-    str => str.trim().length !== 0,
-    "Expected a non-empty string."
-)
-
-const NotNull = Brand.define<Brand.type<"NotNull", Exclude<any, null>>>(
-    obj => obj !== null,
-    "Expected a not null element"
-)
-
-const NotUndefined = Brand.define<Brand.type<"Defined", Exclude<any, undefined>>>(
-    obj => obj !== undefined,
-    "Expected a defined element"
-)
+import { Brand } from "../../src";
 
 const Email = Brand.define<Brand.type<"Email", string>>(
     email => email.includes("@") && email.includes(".com"),
@@ -46,23 +21,23 @@ describe("Branded types", () => {
     describe("Define", () => {
         it.each([
             [
-                Integer,
+                Brand.Number.Integer,
                 [-Number.MAX_SAFE_INTEGER, -10, -5, 0, 5, 10, Number.MAX_SAFE_INTEGER]
             ],
             [
-                Positive,
+                Brand.Number.Positive,
                 [Number.MIN_VALUE, 10, 100]
             ],
             [
-                NotEmpty,
+                Brand.String.NotEmpty,
                 [' a'.repeat(200_000)]
             ],
             [
-                NotNull,
+                Brand.Nullable.NotNull,
                 [1, "A", {name: "An object"}, [1,2,3], [null, undefined], undefined]
             ],
             [
-                NotUndefined,
+                Brand.Nullable.NotUndefined,
                 [1, "A", {name: "An object"}, [1,2,3], [null, undefined], null]
             ],
             [
@@ -77,23 +52,23 @@ describe("Branded types", () => {
 
         it.each([
             [
-                Integer,
+                Brand.Number.Integer,
                 [-Number.MIN_VALUE, Number.MIN_VALUE]
             ],
             [
-                Positive,
+                Brand.Number.Positive,
                 [-Number.MIN_VALUE, -10, -100]
             ],
             [
-                NotEmpty,
+                Brand.String.NotEmpty,
                 [' '.repeat(200_000)]
             ],
             [
-                NotNull,
+                Brand.Nullable.NotNull,
                 [null]
             ],
             [
-                NotUndefined,
+                Brand.Nullable.NotUndefined,
                 [undefined]
             ],
             [
@@ -108,11 +83,6 @@ describe("Branded types", () => {
     })
     
     describe('Combine', () => {
-        const NonNegative = Brand.define<Brand.type<"NonNegative", number>>(
-            n => n >= 0,
-            n => `Expected a non-negative number. Instead got: ${n}`
-        );
-
         const InternalEmail = Brand.define<Brand.type<"InternalEmail", string>>(
             email => email.includes("my-company.com"),
             email => `Expected an internal email. Instead got: ${email}`
@@ -143,11 +113,6 @@ describe("Branded types", () => {
             phone => `Expected an international phone number. Instead got: ${phone}`
         )
 
-        const Negative = Brand.define<Brand.type<"Negative", number>>(
-            n => n < 0,
-            n => `Expected a negative number. Instead got: ${n}`
-        )
-
         const MultipleOfTen = Brand.define<Brand.type<"MultipleOfTen", number>>(
             n => n % 10 === 0,
             n => `Expected a multiple of 10. Instead got: ${n}`
@@ -158,18 +123,13 @@ describe("Branded types", () => {
             n => `Expected a number less than 1. Instead got: ${n}`
         )
 
-        const NonInteger = Brand.define<Brand.type<"NonInteger", number>>(
-            n => !Number.isInteger(n),
-            n => `Expected a non integer number. Instead got: ${n}`
-        )
-
         it.each([
             [
-               [Positive, Integer],
+               [Brand.Number.Positive, Brand.Number.Integer],
                [1, 10, 100, Number.MAX_SAFE_INTEGER],
             ],
             [
-                [NonNegative, Integer],
+                [Brand.Number.NonNegative, Brand.Number.Integer],
                 [0, 1, Number.MAX_SAFE_INTEGER]
             ],
             [
@@ -177,15 +137,15 @@ describe("Branded types", () => {
                 ["john.doe@my-company.com"]
             ],
             [
-                [NotNull, NotUndefined],
+                [Brand.Nullable.NotNull, Brand.Nullable.NotUndefined],
                 [1, {name: "An object"}, [null, undefined], "Hello world!"]
             ],
             [
-                [NotEmpty, URL, RelativeURL],
+                [Brand.String.NotEmpty, URL, RelativeURL],
                 ["/home", "/settings", "/"]
             ],
             [
-                [NotEmpty, URL, AbsoluteURL],
+                [Brand.String.NotEmpty, URL, AbsoluteURL],
                 ["http://www.my-domain.com", "https://www.my-domain.com"]
             ],
             [
@@ -197,11 +157,11 @@ describe("Branded types", () => {
                 ["+1 123-456-7890"]
             ],
             [
-                [Negative, Integer, MultipleOfTen],
+                [Brand.Number.Negative, Brand.Number.Integer, MultipleOfTen],
                 [-10, -100, -1000, -10000]
             ],
             [
-                [Positive, NonInteger, LessThanOne],
+                [Brand.Number.Positive, Brand.Number.Float, LessThanOne],
                 [0.1, 0.5, 0.99, Number.MIN_VALUE, Math.PI - 3]
             ],
         ])('should combine existing branded type to create a new branded type constructor', (constructors: any[], args: any) => {
@@ -212,11 +172,11 @@ describe("Branded types", () => {
 
         it.each([
             [
-               [Positive, Integer],
+               [Brand.Number.Positive, Brand.Number.Integer],
                [Number.MIN_VALUE, -Number.MIN_VALUE, -10, 10.4],
             ],
             [
-                [NonNegative, Integer],
+                [Brand.Number.NonNegative, Brand.Number.Integer],
                 [-Number.MIN_VALUE, 1 + 1e-10]
             ],
             [
@@ -224,15 +184,15 @@ describe("Branded types", () => {
                 ["john.doe@my-companycom", "john.doe@other-company.com"]
             ],
             [
-                [NotNull, NotUndefined],
+                [Brand.Nullable.NotNull, Brand.Nullable.NotUndefined],
                 [null, undefined]
             ],
             [
-                [NotEmpty, URL, RelativeURL],
+                [Brand.String.NotEmpty, URL, RelativeURL],
                 ["", "http://www.my-domain.com", "https://www.my-domain.com"]
             ],
             [
-                [NotEmpty, URL, AbsoluteURL],
+                [Brand.String.NotEmpty, URL, AbsoluteURL],
                 ["/", "/home"]
             ],
             [
@@ -244,11 +204,11 @@ describe("Branded types", () => {
                 ["123-456-7890"]
             ],
             [
-                [Negative, Integer, MultipleOfTen],
+                [Brand.Number.Negative, Brand.Number.Integer, MultipleOfTen],
                 [10, 100, 1000, 10000, 10e20]
             ],
             [
-                [Positive, NonInteger, LessThanOne],
+                [Brand.Number.Positive, Brand.Number.Float, LessThanOne],
                 [2, 1 + 10e-10, -Number.MAX_SAFE_INTEGER, -Number.MIN_VALUE]
             ]
         ])('should create a combined constructor and throw when definition criteria is not met', (constructors: any[], args: any) => {
