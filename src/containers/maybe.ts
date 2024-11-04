@@ -1,4 +1,4 @@
-import { Either } from "./either";
+import { Either } from "./either"
 
 export interface Maybe<T> {
     /**
@@ -39,8 +39,8 @@ export interface Maybe<T> {
      * @param matcher Object containing where functions for Some and None.
      * @returns The result of the matcher.
      */
-    match<S,N>(matcher: {Some: (input: T) => S, None: N}): S | N
-    match<S,N>(matcher: {Some: S, None: N}): S | N
+    match<S, N>(matcher: { Some: (input: T) => S; None: N }): S | N
+    match<S, N>(matcher: { Some: S; None: N }): S | N
 
     /**
      * Applies a function to the value inside the Maybe if it is Some, does nothing otherwise.
@@ -84,7 +84,7 @@ class Some<T> implements Maybe<T>, Unwrap<T> {
     }
 
     filter(predicate: (input: T) => boolean): Maybe<T> {
-        if(predicate(this.value)) {
+        if (predicate(this.value)) {
             return this
         }
 
@@ -99,13 +99,13 @@ class Some<T> implements Maybe<T>, Unwrap<T> {
         return false
     }
 
-    match<S,N>(matcher: {Some: S, None: N}): S | N
+    match<S, N>(matcher: { Some: S; None: N }): S | N
     match<S, N>(matcher: { Some: (input: T) => S; None: N }): S | N {
-        if(typeof matcher.Some === 'function') {
+        if (typeof matcher.Some === "function") {
             return matcher.Some(this.value)
         }
 
-        return matcher.Some;
+        return matcher.Some
     }
 
     ifPresent(fn: (input: T) => any): Maybe<T> {
@@ -148,7 +148,7 @@ class None implements Maybe<never> {
         return true
     }
 
-    match<S, N>(matcher: { Some: S, None: N }): S | N
+    match<S, N>(matcher: { Some: S; None: N }): S | N
     match<S, N>(matcher: { Some: (input: never) => S; None: N }): S | N {
         return matcher.None
     }
@@ -167,15 +167,15 @@ class None implements Maybe<never> {
 }
 
 export class __Maybe {
-    static fromNullable<T>(value: T): Maybe<T> {
-        if(value === null || value === undefined) {
-            return new None();
+    static fromNullable<T>(value: T | null | undefined): Maybe<NonNullable<T>> {
+        if (value === null || value === undefined) {
+            return new None()
         }
 
-        return Some.of(value)
+        return Some.of(value as NonNullable<T>)
     }
 
-    static Some<T>(value: NonNullable<T>): Some<NonNullable<T>> {
+    static Some<T>(value: NonNullable<T>): Some<T> {
         return Some.of(value)
     }
 
