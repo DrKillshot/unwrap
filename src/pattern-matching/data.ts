@@ -36,10 +36,10 @@ class CaseImpl {
     }
 }
 
-export interface Case<Obj extends DataObject> {
-    match<M extends CaseMatching<Obj>>(cases: M): ReturnType<Exclude<M[keyof M], undefined>>
-    variant: keyof Obj
-    data: DataOutput<Obj>[keyof Obj]
+export abstract class Case<Obj extends DataObject> {
+    abstract match<M extends CaseMatching<Obj>>(cases: M): ReturnType<Exclude<M[keyof M], undefined>>
+    abstract variant: keyof Obj
+    abstract data: DataOutput<Obj>[keyof Obj]
 }
 
 export type Data<Obj extends DataObject> = {
