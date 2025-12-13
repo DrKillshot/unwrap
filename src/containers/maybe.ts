@@ -49,6 +49,10 @@ export interface Maybe<T> {
      */
     ifPresent(fn: (input: T) => any): Maybe<T>
 
+    /**
+     * Applies a function when the Maybe is None. Does nothing otherwise.
+     * @param fn Function to apply.
+     */
     ifEmpty(fn: () => void): void
 
     /**
