@@ -50,6 +50,12 @@ export interface Maybe<T> {
     ifPresent(fn: (input: T) => any): Maybe<T>
 
     /**
+     * Applies a function when the Maybe is None. Does nothing otherwise.
+     * @param fn Function to apply.
+     */
+    ifEmpty(fn: () => void): void
+
+    /**
      * Returns the value inside the Maybe if it is Some, otherwise returns the default value.
      * @param defaultValue Value to return if the Maybe is None.
      * @returns The value inside the Maybe or the default value.
@@ -114,6 +120,8 @@ class Some<T> implements Maybe<T>, Unwrap<T> {
         return this
     }
 
+    ifEmpty(fn: () => void): void {}
+
     getWithDefault<R>(_: R): T | R {
         return this.value
     }
@@ -157,6 +165,10 @@ class None implements Maybe<never> {
         return this
     }
 
+    ifEmpty(fn: () => void): void {
+        fn()
+    }
+
     getWithDefault<R>(defaultValue: R): R {
         return defaultValue
     }
@@ -181,6 +193,14 @@ export class __Maybe {
 
     static None(): None {
         return new None()
+    }
+
+    static fromThrowable<T>(fn: () => T): Maybe<T> {
+        try {
+            return Maybe.fromNullable(fn())
+        } catch (e) {
+            return new None()
+        }
     }
 }
 
